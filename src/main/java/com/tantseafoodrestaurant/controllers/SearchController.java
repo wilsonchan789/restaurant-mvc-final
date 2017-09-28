@@ -1,9 +1,9 @@
-package org.launchcode.controllers;
+package com.tantseafoodrestaurant.controllers;
 
-import org.launchcode.models.Job;
-import org.launchcode.models.JobFieldType;
-import org.launchcode.models.forms.SearchForm;
-import org.launchcode.models.data.JobData;
+import com.tantseafoodrestaurant.models.Menu;
+import com.tantseafoodrestaurant.models.MenuFieldType;
+import com.tantseafoodrestaurant.models.forms.SearchForm;
+import com.tantseafoodrestaurant.models.data.MenuItemData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,14 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 
-/**
- * Created by LaunchCode
- */
 @Controller
 @RequestMapping("search")
 public class SearchController {
 
-    private JobData jobData = JobData.getInstance();
+    private MenuItemData menuItemData = MenuItemData.getInstance();
 
     @RequestMapping(value = "")
     public String search(Model model) {
@@ -30,15 +27,15 @@ public class SearchController {
     public String search(Model model,
                          @ModelAttribute SearchForm searchForm) {
 
-        ArrayList<Job> jobs;
+        ArrayList<Menu> menus;
 
-        if (searchForm.getSearchField().equals(JobFieldType.ALL)) {
-            jobs = jobData.findByValue(searchForm.getKeyword());
+        if (searchForm.getSearchField().equals(MenuFieldType.ALL)) {
+            menus = menuItemData.findByValue(searchForm.getKeyword());
         } else {
-            jobs = jobData.findByColumnAndValue(searchForm.getSearchField(), searchForm.getKeyword());
+            menus = menuItemData.findByColumnAndValue(searchForm.getSearchField(), searchForm.getKeyword());
         }
 
-        model.addAttribute("jobs", jobs);
+        model.addAttribute("menus", menus);
 
         return "search";
     }

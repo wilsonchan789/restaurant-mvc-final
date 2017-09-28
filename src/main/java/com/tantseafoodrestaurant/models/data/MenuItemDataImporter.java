@@ -1,9 +1,9 @@
-package org.launchcode.models.data;
+package com.tantseafoodrestaurant.models.data;
 
+import com.tantseafoodrestaurant.models.*;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.launchcode.models.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -11,22 +11,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by LaunchCode
- */
-public class JobDataImporter {
+public class MenuItemDataImporter {
 
-    private static final String DATA_FILE = "job_data.csv";
+    private static final String DATA_FILE = "menuitem_data.csv";
     private static boolean isDataLoaded = false;
 
     /**
      * Read in data from a CSV file and store it in a list
      */
-    static void loadData(JobData jobData) {
+    static void loadData(MenuItemData menuItemData) {
 
         // Only load data once
         if (isDataLoaded) {
@@ -47,38 +42,38 @@ public class JobDataImporter {
             // Put the records into a more friendly format
             for (CSVRecord record : records) {
 
-                String empStr = record.get("employer");
-                String locStr = record.get("location");
-                String coreCompStr = record.get("core competency");
-                String posTypeStr = record.get("position type");
+                String categoryStr = record.get("category");
+                String priceStr = record.get("price");
+                String spicyStr = record.get("spicy");
+                String poundStr = record.get("pound");
 
-                Employer emp = jobData.getEmployers().findByValue(empStr);
-                if (emp == null) {
-                    emp = new Employer(empStr);
-                    jobData.getEmployers().add(emp);
+                Category category = menuItemData.getCategories().findByValue(categoryStr);
+                if (category == null) {
+                    category = new Category(categoryStr);
+                    menuItemData.getCategories().add(category);
                 }
 
-                Location loc = jobData.getLocations().findByValue(locStr);
-                if (loc == null) {
-                    loc = new Location(locStr);
-                    jobData.getLocations().add(loc);
+                Price price = menuItemData.getPrices().findByValue(priceStr);
+                if (price == null) {
+                    price = new Price(priceStr);
+                    menuItemData.getPrices().add(price);
                 }
 
-                PositionType posType = jobData.getPositionTypes().findByValue(posTypeStr);
-                if (posType == null) {
-                    posType = new PositionType(posTypeStr);
-                    jobData.getPositionTypes().add(posType);
+                Spicy spicy = menuItemData.getSpicies().findByValue(spicyStr);
+                if (spicy == null) {
+                    spicy = new Spicy(spicyStr);
+                    menuItemData.getSpicies().add(spicy);
                 }
 
-                CoreCompetency coreComp = jobData.getCoreCompetencies().findByValue(coreCompStr);
-                if (coreComp == null) {
-                    coreComp = new CoreCompetency(coreCompStr);
-                    jobData.getCoreCompetencies().add(coreComp);
+                Pound pound = menuItemData.getPounds().findByValue(poundStr);
+                if (pound == null) {
+                    pound = new Pound(poundStr);
+                    menuItemData.getPounds().add(pound);
                 }
 
-                Job newJob = new Job(record.get("name"), emp, loc, posType, coreComp);
+                Menu newMenu = new Menu(record.get("name"), category, price, spicy, pound);
 
-                jobData.add(newJob);
+                menuItemData.add(newMenu);
             }
 
             // flag the data as loaded, so we don't do it twice

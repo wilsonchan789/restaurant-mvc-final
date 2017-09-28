@@ -1,14 +1,10 @@
-package org.launchcode.models.data;
+package com.tantseafoodrestaurant.models.data;
 
-import org.launchcode.models.Job;
-import org.launchcode.models.JobField;
+import com.tantseafoodrestaurant.models.MenuField;
 
 import java.util.ArrayList;
 
-/**
- * Created by LaunchCode
- */
-public class JobFieldData<T extends JobField> {
+public class MenuFieldData<T extends MenuField> {
 
     private ArrayList<T> allFields = new ArrayList<>();
 

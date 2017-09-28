@@ -1,30 +1,27 @@
-package org.launchcode.models.forms;
+package com.tantseafoodrestaurant.models.forms;
 
-import org.launchcode.models.JobFieldType;
+import com.tantseafoodrestaurant.models.MenuFieldType;
 
-/**
- * Created by LaunchCode
- */
 public class SearchForm {
 
     // The search options
-    private JobFieldType[] fields = JobFieldType.values();
+    private MenuFieldType[] fields = MenuFieldType.values();
 
     // The selected search options
-    private JobFieldType searchField = JobFieldType.ALL;
+    private MenuFieldType searchField = MenuFieldType.ALL;
 
     // The search string
     private String keyword;
 
-    public JobFieldType getSearchField() {
+    public MenuFieldType getSearchField() {
         return searchField;
     }
 
-    public void setSearchField(JobFieldType searchField) {
+    public void setSearchField(MenuFieldType searchField) {
         this.searchField = searchField;
     }
 
-    public JobFieldType[] getFields() {
+    public MenuFieldType[] getFields() {
         return fields;
     }
 

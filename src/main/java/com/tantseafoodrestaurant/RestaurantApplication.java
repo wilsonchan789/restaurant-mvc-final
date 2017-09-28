@@ -1,12 +1,12 @@
-package org.launchcode;
+package com.tantseafoodrestaurant;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TechjobsApplication {
+public class RestaurantApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TechjobsApplication.class, args);
+		SpringApplication.run(RestaurantApplication.class, args);
 	}
 }
